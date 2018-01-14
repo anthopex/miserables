@@ -13,9 +13,9 @@ public class Node {
     private int eccentricity = -1;
     private boolean marked = false;
 
-    public Node(String label, List<String>ids) {
+    public Node(String label/*, List<String>ids*/) {
         this.label = label;
-        this.ids =ids;
+//        this.ids =ids;
     }
 
     public List<Edge> getEdges() {

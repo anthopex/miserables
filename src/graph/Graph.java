@@ -21,10 +21,10 @@ public class Graph {
                 System.out.println("    " + mapentry.getValue().getEdges().get(i).getNodeTo().getLabel() + ", distance: " + mapentry.getValue().getEdges().get(i).getWeight());
             }
 
-            System.out.println("Lignes: ");
-            for (int i = 0; i < mapentry.getValue().getId().size(); i++) {
-                System.out.println("    " + mapentry.getValue().getId().get(i));
-            }
+//            System.out.println("Lignes: ");
+//            for (int i = 0; i < mapentry.getValue().getId().size(); i++) {
+//                System.out.println("    " + mapentry.getValue().getId().get(i));
+//            }
         }
     }
 
@@ -39,16 +39,16 @@ public class Graph {
 //        return null;
     }
 
-    public void addUndirectedEdgeBetweenNodes(int node1Index, int node2Index, String id) {
-        addEdgeBetweenNodes(node1Index, node2Index, id);
-        addEdgeBetweenNodes(node2Index, node1Index, id);
+    public void addUndirectedEdgeBetweenNodes(int node1Index, int node2Index, int weight) {
+        addEdgeBetweenNodes(node1Index, node2Index, weight);
+        addEdgeBetweenNodes(node2Index, node1Index, weight);
     }
 
-    public void addEdgeBetweenNodes(int node1Index, int node2Index, String id) {
+    public void addEdgeBetweenNodes(int node1Index, int node2Index, int weight) {
         Node node1 = nodes.get(node1Index);
         Node node2 = nodes.get(node2Index);
 
-        Edge edge = new Edge(node1, node2, id);
+        Edge edge = new Edge(node1, node2, weight);
 
         edges.add(edge);
         node1.addEdge(edge);

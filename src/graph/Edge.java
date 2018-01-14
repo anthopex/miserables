@@ -3,14 +3,13 @@ package graph;
 public class Edge {
     private Node nodeFrom;
     private Node nodeTo;
-    private int weight = -1;
-    private String id;
+    private int weight;
     private int betweenness = 0;
 
-    Edge(Node nodeFrom, Node nodeTo, String id) {
+    Edge(Node nodeFrom, Node nodeTo, int weight) {
         this.nodeTo = nodeTo;
         this.nodeFrom = nodeFrom;
-        this.id = id;
+        this.weight = weight;
     }
 
     @Override
@@ -19,7 +18,7 @@ public class Edge {
                 "nodeFrom=" + nodeFrom +
                 ", nodeTo=" + nodeTo +
                 ", weight=" + weight +
-                ", id='" + id + '\'' +
+//                ", id='" + id + '\'' +
                 '}';
     }
 
@@ -47,13 +46,13 @@ public class Edge {
         this.weight = weight;
     }
 
-    public String getLine() {
-        return id;
-    }
-
-    public void setLine(String id) {
-        this.id = id;
-    }
+//    public String getLine() {
+//        return id;
+//    }
+//
+//    public void setLine(String id) {
+//        this.id = id;
+//    }
 
     public int getBetweenness() {
         return betweenness;
