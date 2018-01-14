@@ -53,8 +53,6 @@ public class GraphProperties {
                 int eccentricity = maxEntry.getValue().getDistanceFromSource();
                 currentNode.setEccentricity(eccentricity);
 
-                // TODO what if eccentricity == Integer.MAX_VALUE ?
-
                 // Handle computation of the longest path and of the radius and diameter :
                 if (diameter == null || eccentricity > diameter) {
                     diameter = eccentricity;

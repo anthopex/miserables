@@ -8,7 +8,6 @@ import java.util.*;
 
 public class DijkstraPathFinder extends PathFinder {
     private Graph graph;
-
     private List<Edge> path = new ArrayList<>();
     private int pathLength;
     private List<Node> traversedNodes = new ArrayList<>();

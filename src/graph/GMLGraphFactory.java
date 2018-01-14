@@ -15,7 +15,7 @@ public class GMLGraphFactory {
         // Ouvre le GML.
         String text = new String(Files.readAllBytes(Paths.get(filepath)), StandardCharsets.UTF_8);
 
-        // Cré un objet GML dont on peut récupérer les données
+        // Créé un objet GML dont on peut récupérer les données
         List<List<Map<String, Object>>> gml = extractGml(text);
         return createFromGMLObject(gml);
     }
@@ -28,7 +28,7 @@ public class GMLGraphFactory {
         List<Map<String, Object>> currentList = new ArrayList<>();
         Map<String, Object> currentObject = new HashMap<>();
         String lastObjectType = "  node";
-        for (String currentLine : text.split("\n")) {
+        for (String currentLine : text.split("\r\n")) {
             if ("  [".equals(currentLine) || "[".equals(currentLine)) {
                 indentationLevel++;
             } else if ("  ]".equals(currentLine) && indentationLevel == 2) {
@@ -45,61 +45,49 @@ public class GMLGraphFactory {
                     currentList = new ArrayList<>();
                 }
 
-
                 lastObjectType = currentLine;
             } else {
                 String[] currentSplittedLine = currentLine.split(" ");
                 if (currentSplittedLine.length < 2) continue;
                 currentObject.put(currentSplittedLine[currentSplittedLine.length - 2], currentSplittedLine[currentSplittedLine.length - 1].replaceAll("\"", ""));
             }
-
-
         }
-
         return gml;
     }
 
-
     private static Graph createFromGMLObject(List<List<Map<String, Object>>> gml) {
-        // Cré un objet GML qui contient la liste des stations + un itérateur pour les parcourir
+        // Créé un objet GML qui contient la liste des personnages + un itérateur pour les parcourir
         List<Map<String, Object>> characters = gml.get(0);
 
-        // Cré un objet GML qui contient les données sur les lignes + un itérateur pour les parcourir
+        // Créé un objet GML qui contient les données sur les relations + un itérateur pour les parcourir
         List<Map<String, Object>> relations = gml.get(1);
-
 
         Graph graph = new Graph();
 
-        addStationsToGraph(graph, characters);
+        addCharactersToGraph(graph, characters);
 
-        addEdgesBetweenStations(graph, relations);
+        addEdgesBetweenCharacters(graph, relations);
 
         return graph;
     }
 
-    private static void addStationsToGraph(Graph graph,  List<Map<String, Object>> characters) {
+    private static void addCharactersToGraph(Graph graph,  List<Map<String, Object>> characters) {
         Map<Integer, Node> nodes = graph.getNodes();
-//        Iterator iteratorStation = stations.keys();
 
-        // Parcourt les stations et les ajoute au graph.
+        // Parcours les personnages et les ajoute au graph.
         for (Map<String, Object> currentChar : characters) {
-            // Cré un objet GML avec les données de la station
-//            GMLObject station = stations.getGMLObject(iteratorStation.next().toString());
-
-
-            // Creates the station and add it to the graph :
+            // Créé le personnage et l'ajout au graphe :
             Integer id = Integer.parseInt(currentChar.get("id").toString());
             nodes.put(id,
                     new Node(
                             currentChar.get("label").toString()
                     )
             );
-
         }
     }
 
 
-    private static void addEdgesBetweenStations(Graph graph, List<Map<String, Object>> relations) {
+    private static void addEdgesBetweenCharacters(Graph graph, List<Map<String, Object>> relations) {
         for (int i = 0; i < relations.size(); i++) {
             // Crée une liste contenant la correspondance (deux ou trois arrêts)
             Map<String, Object> relation = relations.get(i);
