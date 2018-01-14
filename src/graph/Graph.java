@@ -20,11 +20,6 @@ public class Graph {
             for (int i = 0; i < mapentry.getValue().getEdges().size(); i++) {
                 System.out.println("    " + mapentry.getValue().getEdges().get(i).getNodeTo().getLabel() + ", distance: " + mapentry.getValue().getEdges().get(i).getWeight());
             }
-
-//            System.out.println("Lignes: ");
-//            for (int i = 0; i < mapentry.getValue().getId().size(); i++) {
-//                System.out.println("    " + mapentry.getValue().getId().get(i));
-//            }
         }
     }
 

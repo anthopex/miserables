@@ -46,14 +46,6 @@ public class Edge {
         this.weight = weight;
     }
 
-//    public String getLine() {
-//        return id;
-//    }
-//
-//    public void setLine(String id) {
-//        this.id = id;
-//    }
-
     public int getBetweenness() {
         return betweenness;
     }
